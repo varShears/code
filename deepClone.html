@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function clone(data) {
+        let newObj
+        if (typeof data === 'object') {
+          newObj = Array.isArray(data) ? [] : {}
+          for (const key in data) {
+            newObj[key] = data[key]
+          }
+          return newObj
+        } else {
+          return data
+        }
+      }
+
+      // const data = {
+      //   field1: 1,
+      //   field2: undefined,
+      //   field3: 'ConardLi',
+      //   field4: {
+      //     child: 'child',
+      //     child2: {
+      //       child2: 'child2',
+      //     },
+      //   },
+      // }
+
+      const data = {
+        field1: 1,
+        field2: undefined,
+        field3: {
+          child: 'child',
+        },
+        field4: [2, 4, 8],
+      }
+
+      data.data = data
+
+      clone(data)
+      console.log(clone(data))
+    </script>
+  </head>
+  <body></body>
+</html>
