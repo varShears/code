@@ -40,17 +40,3 @@ data.data = data
 
 clone(data)
 console.log(clone(data))
-
-function deepClone(data) {
-  if (!data || typeof data !== 'object') {
-    return data
-  }
-
-  const newData = Array.isArray(data) ? [] : {}
-
-  for (const i in data) {
-    newData[i] = data[i]
-  }
-
-  return newData
-}
