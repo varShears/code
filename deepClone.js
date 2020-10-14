@@ -1,18 +1,16 @@
-function clone(data, map = new Map()) {
-  let newObj
-  if (typeof data === 'object') {
-    newObj = Array.isArray(data) ? [] : {}
-    if (map.get(data)) {
-      return map.get(data)
-    }
-    map.set(data, newObj)
-    for (const key in data) {
-      newObj[key] = data[key]
-    }
-    return newObj
-  } else {
-    return data
+function clone(data, map = Map()) {
+  const result = Array.isArray(data) ? [] : {}
+  for (const key in data) {
+    if (map.get())
+      if (data.hasOwnProperty(key)) {
+        if (typeof data[key] === 'object' && data[key] !== null) {
+          result[key] = clone(data[key])
+        } else {
+          result[key] = data[key]
+        }
+      }
   }
+  return result
 }
 
 // const data = {
