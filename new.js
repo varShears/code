@@ -9,3 +9,10 @@ function newOperator(ctor, ...args) {
   const isFunction = typeof res === 'function'
   return isObject || isFunction ? res : obj
 }
+
+function create() {
+  let obj = {}
+  const Con = [].slice().call(arguments)
+  obj.__proto__ = Con.prototype
+  return Con.apply(obj, arguments)
+}

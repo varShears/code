@@ -21,14 +21,44 @@ const p4 = new Promise((resolve) => {
 
 const ps = [p1, p2, p3, p4]
 
-const run = (p) => {
-  p.then((d) => {
-    console.log(d)
+// const run = (p) => {
+//   p.then((d) => {
+//     console.log(d)
 
-    const nextP = ps[ps.findIndex((f) => f === p) + 1]
-    if (nextP) {
-      run(nextP)
+//     const nextP = ps[ps.findIndex((f) => f === p) + 1]
+//     if (nextP) {
+//       run(nextP)
+//     }
+//   })
+// }
+// run(ps[0])
+
+const service = (ps) => {
+  const queue = ps
+
+  // while (queue.length > 0) {
+  function pick() {
+    if (queue.length === 0) {
+      return
     }
-  })
+    const target = queue.shift()
+    run(target)
+  }
+
+  function run(target) {
+    target
+      .then((res) => {
+        console.log(res)
+        pick()
+      })
+      .catch((err) => {
+        console.log(err)
+        pick()
+      })
+  }
+
+  pick()
+  // }
 }
-run(ps[0])
+
+service(ps)
