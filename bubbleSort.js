@@ -1,5 +1,11 @@
 const ar = [55, 1234, 1, 33, 11, 24, 56, 88]
 
+function swap(arr, i, j) {
+  const temp = arr[i]
+  arr[i] = arr[j]
+  arr[j] = temp
+}
+
 function bubbleSort(arr) {
   if (!Array.isArray(arr)) {
     throw new TypeError('Error')
@@ -8,22 +14,16 @@ function bubbleSort(arr) {
     return arr
   }
 
-  let lastIndex = arr.length - 1
-  while (lastIndex > 0) {
-    // 当最后一个交换的元素为第一个时，说明后面全部排序完毕
-    let flag = true,
-      k = lastIndex
-    for (let j = 0; j < k; j++) {
-      if (arr[j] > arr[j + 1]) {
-        flag = false
-        lastIndex = j // 设置最后一次交换元素的位置
-        ;[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
-      }
+  for (let i = arr.length - 1; i > 0; i--) {
+    // 从 0 到 `length - 1` 遍历
+    for (let j = 0; j < i; j++) {
+      if (arr[j] > arr[j + 1]) swap(arr, j, j + 1)
     }
-    if (flag) break
   }
 
-  console.log(arr)
+  return arr
 }
 
-bubbleSort(ar)
+const a = bubbleSort(ar)
+
+console.log(a)
